@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/st.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>Document</title>
+</head>
+<body>
+    <form id="form" method="post" action="/auth" enctype="multipart/form-data">
+        <div class="first-part">
+            <h1>Sign In</h1>
+            <input autocomplete="off" name="name" type="text" id="name" placeholder="Enter ur name">
+            <span class="span-error">name or email must be unique</span>
+            <input autocomplete="off" name="email" type="email" placeholder="Enter ur email" id="email">
+            <span class="span-error">name or email must be unique</span>
+            <div class="passes">
+                <input autocomplete="off" name="password" type="password" placeholder="Enter ur password" id="password">
+                <input type="radio" id="radio">
+            </div>
+            <input autocomplete="off" type="submit" id="submit" value="SUBMIT">
+        </div>
+        <div class="second-part">
+            <input autocomplete="off" type="file" id="user-picture" name="picture">
+            <label for="user-picture"><img draggable="false" id="img-picture" src="https://avatars.mds.yandex.net/i?id=3bb4ea929bfefad945aec257622d92dbf2f173f5-9041934-images-thumbs&n=13" alt="picture"/></label>
+            <label id="file" for="user-picture"><span class="material-symbols-outlined">download</span><span class="pick-picture" style="margin-left: 10px;">Pick ur profile icon</span></span></label>
+        </div>
+    </form>
+    <script>
+        const img = document.getElementById('img-picture');
+        const ourFile = document.getElementById('user-picture');
+        const submit = document.getElementById('submit');
+        ourFile.onchange = (e) => {
+            const fi = e.target.files[0];
+            if (fi) {            
+                const file = new FileReader();
+                file.addEventListener('load', () => {
+                    img.src = file.result;
+                });
+                file.readAsDataURL(fi);
+            };
+            if (ourFile.files.length == 0) {
+                submit.disabled = true;
+            } else {
+                submit.disabled = false;
+            };
+        };
+        const radio = document.getElementById('radio');
+        const pass = document.getElementById('password');
+        radio.onchange = () => {        
+            if (radio.checked) {
+                pass.type = 'text';
+                setTimeout(() => {
+                    radio.checked = false;
+                    pass.type = 'password';
+                }, 200)
+            };
+        };
+        const errorMessage = document.querySelectorAll(".span-error");
+        const authForm = document.getElementById("form");
+        const email = document.getElementById('email');
+        const name = document.getElementById('name');
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get("error");
+        if (error === "true") {
+            errorMessage.forEach(el => {
+                el.style.display = 'block';
+            });
+        } else {
+            errorMessage.forEach(el => {
+                el.style.display = 'none';
+            });
+        }
+        errorMessage.forEach(el => {
+            if (el.style.display == 'block') {
+                email.style.marginBottom = '1px';
+                name.style.marginBottom = '1px';
+            }
+        })
+    </script>
+</body>
+</html>

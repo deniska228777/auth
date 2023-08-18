@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/posts" method="post">
+        <h1>Log In</h1>
+        <input autocomplete="off" name="email" type="email" placeholder="Enter ur email" id="email">
+        <div class="passes">
+            <input autocomplete="off" name="password" type="password" placeholder="Enter ur password" id="password">
+            <input type="radio" id="radio" onchange="change(this)">
+        </div>
+        <input type="submit" id="submit" value="SUBMIT">
+    </form>
+    <script>
+        const change = (el) => {
+            if (el.checked) {
+                const pass = document.getElementById('password');
+                pass.type = 'text';
+                setTimeout(() => {
+                    el.checked = false;
+                    pass.type = 'password';
+                }, 300);
+            };
+        };
+    </script>
+</body>
+</html>

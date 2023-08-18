@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+* {
+    margin: 0;
+    font-family: 'Segoe UI';
+}
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    flex-direction: column;
+}
+form {
+    display: flex;
+    background: linear-gradient(to left, #ff512f, #f09819);
+    flex-direction: column;
+    padding: 20px;
+    width: 300px;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5px;
+    position: relative;
+    border-radius: 20px;
+}
+form > input {
+    margin: 10px;
+    border: 0;
+    outline: 0;
+    width: 220px;
+    background-color: transparent;
+    border-bottom: 2px solid #ff3d17;
+    padding-bottom: 5px;
+}
+#password {
+    width: 200px;
+    margin: 10px;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    border-bottom: 2px solid #ff3d17;
+    padding-bottom: 5px;
+}
+#submit {
+    display: flex;
+    width: 200px;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: 2px solid #c55015;
+    height: 26px;
+    user-select: none;
+    text-align: center;
+}
+#submit:hover {
+    background-color: #ff8142;
+    cursor: pointer;
+}
+input::placeholder {
+    color: #000;
+    user-select: none;
+}
+
