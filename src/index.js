@@ -48,7 +48,7 @@ app.post('/authh', async (req, res) => {
     console.log(req.body.code);
 });
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/public/login.html')
+    res.sendFile(path.resolve('public', 'login.html'))
 });
 app.post('/posts', urlParser, async (req, res) => {
         const user = await UserService.findByEmail(req.body.email);
@@ -82,7 +82,7 @@ app.post('/auth/authconfirm', urlParser, async (req, res) => {
 async function start() {
     await mongoose.connect(url, {useUnifiedTopology: true, useNewUrlParser: true})
     .then(() => app.listen(PORT, console.log(`сервер начал работу по ссылке http://localhost:${PORT}`)))
-    .catch(() => res.status(500).redirect('/error'));
+    .catch(() => res.status(404).redirect('/error'));
 };
 
 start();
