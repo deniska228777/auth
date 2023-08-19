@@ -13,14 +13,14 @@ rout.get('/', (req, res) => {
     res.sendFile(path.resolve('', 'index.html'));
 });
 rout.get('/error', (req, res) => {
-    res.sendFile(path.resolve('public', 'error.html'));
+    res.sendFile(path.resolve('', 'error.html'));
 });
 rout.post('/auth', urlParser, async (req, res) => {
     const { name, email, password } = req.body;
     const hashPass = bcrypt.hashSync(password, 12);
     try {
         await UserService.create({name: name, email: email, password: hashPass, userpicture: req.files.picture})
-        res.sendFile(path.resolve('public', 'auth.html'));
+        res.sendFile(path.resolve('', 'auth.html'));
     } catch(error) {
         if (error.code == 11000) {
             res.redirect('/?error=true');    
@@ -34,7 +34,7 @@ rout.post('/authh', async (req, res) => {
     console.log(req.body.code);
 });
 rout.get('/login', (req, res) => {
-    res.sendFile(path.resolve('public', 'login.html'))
+    res.sendFile(path.resolve('', 'login.html'))
 });
 rout.post('/posts', urlParser, async (req, res) => {
         const user = await UserService.findByEmail(req.body.email);
