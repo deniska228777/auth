@@ -10,7 +10,7 @@ const urlParser = bp.urlencoded({ extended: false });
 
 
 rout.get('/', (req, res) => {
-    res.sendFile(path.resolve('public', 'index.html'));
+    res.sendFile(path.resolve('', 'index.html'));
 });
 rout.get('/error', (req, res) => {
     res.sendFile(path.resolve('public', 'error.html'));

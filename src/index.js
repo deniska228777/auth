@@ -7,7 +7,7 @@ const routes = require("./routes.js");
 const fileUpload = require("express-fileupload");
 const allCodes = require("./allCodes.js");
 const rout = require("./coreroutes.js");
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5445;
 dotenv.config();
 
 
