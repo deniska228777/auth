@@ -10,31 +10,31 @@ const bp = require("body-parser");
 const UserService = require("./UserService.js");
 const allCodes = require("./allCodes.js");
 const bcrypt = require("bcryptjs");
+const path = require("path");
 
 dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 const urlParser = bp.urlencoded({ extended: false }); 
 
-
-app.use(express.static('static'));
-app.use('/static', express.static('public'));
+app.use('/static', express.static('static'));
+app.use('/src', express.static('src'));
 app.use(express.json());
 app.use(fileUpload({}));
 app.use('/user', routes);
 app.use('/codes', allCodes)
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html');
+    res.sendFile(path.resolve('public', 'index.html'));
 });
 app.get('/error', (req, res) => {
-    res.sendFile(__dirname + '/views/error.html');
+    res.sendFile(path.resolve('public', 'error.html'));
 });
 app.post('/auth', urlParser, async (req, res) => {
     const { name, email, password } = req.body;
     const hashPass = bcrypt.hashSync(password, 12);
     try {
         await UserService.create({name: name, email: email, password: hashPass, userpicture: req.files.picture})
-        .then(res.sendFile(__dirname + '/views/auth.html'));
+        res.sendFile(path.resolve('public', 'index.html'));
     } catch(error) {
         if (error.code == 11000) {
             res.redirect('/?error=true');    
@@ -48,7 +48,7 @@ app.post('/authh', async (req, res) => {
     console.log(req.body.code);
 });
 app.get('/login', (req, res) => {
-    res.sendFile(__dirname + '/views/login.html')
+    res.sendFile(__dirname + '/public/login.html')
 });
 app.post('/posts', urlParser, async (req, res) => {
         const user = await UserService.findByEmail(req.body.email);
