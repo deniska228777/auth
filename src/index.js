@@ -8,6 +8,7 @@ const fileUpload = require("express-fileupload");
 const allCodes = require("./allCodes.js");
 const rout = require("./coreroutes.js");
 const PORT = process.env.PORT || 5445;
+const path = require("path");
 dotenv.config();
 
 
@@ -19,6 +20,10 @@ app.use(fileUpload({}));
 app.use('/user', routes);
 app.use('/codes', allCodes)
 app.use('/', rout)
+
+app.get('/error', (req, res) => {
+    res.sendFile(path.resolve('', 'error.html'))
+});
 
 async function start() {
     await mongoose.connect(url, {useUnifiedTopology: true, useNewUrlParser: true})
