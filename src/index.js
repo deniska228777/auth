@@ -34,7 +34,7 @@ app.post('/auth', urlParser, async (req, res) => {
     const hashPass = bcrypt.hashSync(password, 12);
     try {
         await UserService.create({name: name, email: email, password: hashPass, userpicture: req.files.picture})
-        res.sendFile(path.resolve('public', 'index.html'));
+        res.sendFile(path.resolve('public', 'auth.html'));
     } catch(error) {
         if (error.code == 11000) {
             res.redirect('/?error=true');    
