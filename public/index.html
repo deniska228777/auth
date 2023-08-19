@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/st.css">
+    <link rel="stylesheet" href="/src/css/st.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>Document</title>
 </head>
@@ -12,18 +12,18 @@
     <form id="form" method="post" action="/auth" enctype="multipart/form-data">
         <div class="first-part">
             <h1>Sign In</h1>
-            <input autocomplete="off" name="name" type="text" id="name" placeholder="Enter ur name">
+            <input autocomplete="off" name="name" type="text" id="name" placeholder="Enter ur name" required>
             <span class="span-error">name or email must be unique</span>
-            <input autocomplete="off" name="email" type="email" placeholder="Enter ur email" id="email">
+            <input autocomplete="off" name="email" type="email" placeholder="Enter ur email" id="email" required>
             <span class="span-error">name or email must be unique</span>
             <div class="passes">
-                <input autocomplete="off" name="password" type="password" placeholder="Enter ur password" id="password">
+                <input autocomplete="off" name="password" type="password" placeholder="Enter ur password" id="password" required>
                 <input type="radio" id="radio">
             </div>
-            <input autocomplete="off" type="submit" id="submit" value="SUBMIT">
+            <input autocomplete="off" type="submit" id="submit" value="SUBMIT" title="download img" disabled>
         </div>
         <div class="second-part">
-            <input autocomplete="off" type="file" id="user-picture" name="picture">
+            <input autocomplete="off" type="file" id="user-picture" name="picture" required>
             <label for="user-picture"><img draggable="false" id="img-picture" src="https://avatars.mds.yandex.net/i?id=3bb4ea929bfefad945aec257622d92dbf2f173f5-9041934-images-thumbs&n=13" alt="picture"/></label>
             <label id="file" for="user-picture"><span class="material-symbols-outlined">download</span><span class="pick-picture" style="margin-left: 10px;">Pick ur profile icon</span></span></label>
         </div>
@@ -46,6 +46,13 @@
             } else {
                 submit.disabled = false;
             };
+            if (ourFile.files.length > 0) {
+                submit.removeAttribute('disabled');
+                submit.setAttribute('title', 'submit');
+            } else {
+                submit.setAttribute('disabled', 'disabled');
+                submit.setAttribute('title', 'disabled');
+            }
         };
         const radio = document.getElementById('radio');
         const pass = document.getElementById('password');
