@@ -1,16 +1,16 @@
-const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const url = 'mongodb+srv://deniska:hillclimb@cluster0.t80tjs5.mongodb.net/?retryWrites=true&w=majority'
+const dotenv = require("dotenv");
 const express = require("express");
 const app = express();
 const routes = require("./routes.js");
 const fileUpload = require("express-fileupload");
 const allCodes = require("./allCodes.js");
 const rout = require("./coreroutes.js");
-
+const PORT = process.env.PORT || 5000;
 dotenv.config();
 
-const PORT = process.env.PORT || 5000;
+
 
 app.use('/static', express.static('static'));
 app.use('/src', express.static('src'));
